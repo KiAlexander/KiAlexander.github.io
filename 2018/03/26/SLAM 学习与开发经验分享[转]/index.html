@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="SLAM 学习与开发经验分享 导语  毫无疑问，SLAM是当前最酷炫的技术.在这里，我给大家分享一些在学习SLAM的过程中的一些资料与方法（不断更新中...）&amp;lt;/br&amp;gt;&amp;lt;/br&amp;gt; AR开发者社区：  目录   入门   基础   进阶   优秀文章   技术博客   网站与研究组织   书籍与资料   SLAM 方案   优秀案例   入门 视觉SLAM的基础知识-高翔(高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLAM 学习与开发经验分享[转]">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/index.html">
+<meta property="og:site_name" content="素夜吴墨">
+<meta property="og:description" content="SLAM 学习与开发经验分享 导语  毫无疑问，SLAM是当前最酷炫的技术.在这里，我给大家分享一些在学习SLAM的过程中的一些资料与方法（不断更新中...）&amp;lt;/br&amp;gt;&amp;lt;/br&amp;gt; AR开发者社区：  目录   入门   基础   进阶   优秀文章   技术博客   网站与研究组织   书籍与资料   SLAM 方案   优秀案例   入门 视觉SLAM的基础知识-高翔(高">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/SLAM%20学习与开发经验分享[转]/paopao.png">
+<meta property="og:updated_time" content="2018-03-26T11:23:14.417Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SLAM 学习与开发经验分享[转]">
+<meta name="twitter:description" content="SLAM 学习与开发经验分享 导语  毫无疑问，SLAM是当前最酷炫的技术.在这里，我给大家分享一些在学习SLAM的过程中的一些资料与方法（不断更新中...）&amp;lt;/br&amp;gt;&amp;lt;/br&amp;gt; AR开发者社区：  目录   入门   基础   进阶   优秀文章   技术博客   网站与研究组织   书籍与资料   SLAM 方案   优秀案例   入门 视觉SLAM的基础知识-高翔(高">
+<meta name="twitter:image" content="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>SLAM 学习与开发经验分享[转]</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/KiAlexander?tab=repositories">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/29/数字图像处理学习笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/03/26/视觉SLAM学习笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&text=SLAM 学习与开发经验分享[转]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&is_video=false&description=SLAM 学习与开发经验分享[转]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SLAM 学习与开发经验分享[转]&body=Check out this article: http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&name=SLAM 学习与开发经验分享[转]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">SLAM 学习与开发经验分享</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.1.</span> <span class="toc-text">导语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">进阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">优秀文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.6.</span> <span class="toc-text">技术博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.7.</span> <span class="toc-text">网站与研究组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.8.</span> <span class="toc-text">书籍与资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.9.</span> <span class="toc-text">SLAM 方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.10.</span> <span class="toc-text">优秀案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">不断更新中...</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        SLAM 学习与开发经验分享[转]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">素夜吴墨</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-26T11:23:14.416Z" itemprop="datePublished">2018-03-26</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>SLAM 学习与开发经验分享<img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome"></h1>
+<h3>导语</h3>
+<blockquote>
+<p>毫无疑问，SLAM是当前最酷炫的技术.在这里，我给大家分享一些在学习SLAM的过程中的一些资料与方法（不断更新中...）&lt;/br&gt;&lt;/br&gt;
+AR开发者社区：</p>
+</blockquote>
+<h2>目录</h2>
+<ul>
+<li>
+<p><strong><a href="#%E5%85%A5%E9%97%A8">入门</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E5%9F%BA%E7%A1%80">基础</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E8%BF%9B%E9%98%B6">进阶</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E4%BC%98%E7%A7%80%E6%96%87%E7%AB%A0">优秀文章</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2">技术博客</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E7%BD%91%E7%AB%99%E4%B8%8E%E7%A0%94%E7%A9%B6%E7%BB%84%E7%BB%87">网站与研究组织</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E4%B9%A6%E7%B1%8D%E4%B8%8E%E8%B5%84%E6%96%99">书籍与资料</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#SLAM%E6%96%B9%E6%A1%88">SLAM 方案</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#%E4%BC%98%E7%A7%80%E6%A1%88%E4%BE%8B">优秀案例</a></strong></p>
+</li>
+</ul>
+<h2>入门</h2>
+<p><a href="http://www.bilibili.com/video/av5911960/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉SLAM的基础知识-高翔</a>(高翔博士)-----视频，吐血推荐</p>
+<p><a href="http://blog.csdn.net/yimingsilence/article/details/51701944" target="_blank" rel="noopener">关于slam</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/21381490" target="_blank" rel="noopener">SLAM简介</a></p>
+<p><a href="http://www.leiphone.com/news/201609/iAe3f8qmRHXavgSl.html?viewType=weixin" target="_blank" rel="noopener">SLAM第一篇：基础知识</a></p>
+<p><a href="https://wenku.baidu.com/view/905bf05d312b3169a451a495.html" target="_blank" rel="noopener">SLAM_介绍以及浅析</a></p>
+<p><a href="http://www.leiphone.com/news/201605/5etiwlnkWnx7x0zb.html" target="_blank" rel="noopener">SLAM的前世今生 终于有人说清楚了</a>(张一茗)</p>
+<p><a href="https://pan.baidu.com/s/1dFxKLZb" target="_blank" rel="noopener">SLAM for Dummies</a>（一本关于实时定位及绘图（SLAM）的入门指导教程）    提取码：k3r3</p>
+<p><a href="https://pan.baidu.com/s/1pLO4Nwv" target="_blank" rel="noopener">STATE ESTIMATION FOR ROBOTICS</a> (吐血推荐)  提取码：y7tc</p>
+<h2>基础</h2>
+<p>数学基础</p>
+<ul>
+<li>
+<p><a href="https://pan.baidu.com/s/1pLwK4uJ" target="_blank" rel="noopener">计算机视觉中的数学方法</a> 提取码：afyg  ----本书着重介绍射影几何学及其在视觉中的应用</p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/5113334.html" target="_blank" rel="noopener">视觉SLAM中的数学基础 第一篇</a>----3D空间的位置表示</p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/5120175.html" target="_blank" rel="noopener">视觉SLAM中的数学基础 第二篇</a>----四元数</p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/5137454.html" target="_blank" rel="noopener">视觉SLAM中的数学基础 第三篇</a>----李群与李代数</p>
+</li>
+<li>
+<p><a href="https://pan.baidu.com/s/1eRUC3ke" target="_blank" rel="noopener">李群和李代数</a> 提取码：92x2</p>
+</li>
+</ul>
+<p>语言编程基础</p>
+<ul>
+<li>
+<p><a href="http://www.runoob.com/" target="_blank" rel="noopener">菜鸟教程</a>----学习C++与python基础语法</p>
+</li>
+<li>
+<p><a href="https://pan.baidu.com/s/1bpcQlvp" target="_blank" rel="noopener">python计算机视觉编程</a> 提取码：kyt9</p>
+</li>
+<li>
+<p><a href="https://pan.baidu.com/s/1i4Gtv3B" target="_blank" rel="noopener">OpenCV3编程入门_毛星云编著</a>----C++实现   提取码：qnms</p>
+</li>
+</ul>
+<p>计算机视觉基础</p>
+<ul>
+<li>
+<p><a href="https://pan.baidu.com/s/1dFHxDiL" target="_blank" rel="noopener">计算机视觉算法与应用中文版</a> 提取码：b8y1</p>
+</li>
+<li>
+<p><a href="https://pan.baidu.com/s/1nvseOf3" target="_blank" rel="noopener">特征提取与图像处理</a>   提取码：hgy2</p>
+</li>
+<li>
+<p><a href="https://pan.baidu.com/s/1i4O0LOp" target="_blank" rel="noopener">机器视觉算法与应用</a>  提取码：hxgn</p>
+</li>
+</ul>
+<p>泡泡机器人SLAM 优质视频课程----视觉slam十四讲</p>
+<ul>
+<li>
+<p><a href="http://www.bilibili.com/video/av7494417/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉slam十四讲1-2 引言与概述</a></p>
+</li>
+<li>
+<p><a href="http://www.bilibili.com/video/av7612959/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉SLAM十四讲（第三章）</a></p>
+</li>
+<li>
+<p><a href="http://www.bilibili.com/video/av7705856/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉slam第4章</a></p>
+</li>
+<li>
+<p><a href="http://www.bilibili.com/video/av7816357/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉SLAM十四讲-第五章-相机与图像</a></p>
+</li>
+<li>
+<p><a href="http://www.bilibili.com/video/av7921657/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉SLAM十四讲-第六章-非线性优化</a></p>
+</li>
+<li>
+<p><a href="http://www.bilibili.com/video/av8061127/?from=search&amp;seid=375069506917728550" target="_blank" rel="noopener">视觉SLAM十四讲-第七章-视觉里程计一</a></p>
+</li>
+</ul>
+<p>Python + SLAM</p>
+<ul>
+<li>
+<p><a href="http://www.rosclub.cn/post-682.html" target="_blank" rel="noopener">用python学习slam系列（一）从图像到点云</a></p>
+</li>
+<li>
+<p><a href="http://www.rosclub.cn/post-684.html" target="_blank" rel="noopener">用python学习slam系列（二）特征提取与配准</a></p>
+</li>
+</ul>
+<h2>进阶</h2>
+<p>一步步实现SLAM系列教程</p>
+<ul>
+<li>
+<p><a href="http://fengbing.net/2016/02/03/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0slam1-%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/" target="_blank" rel="noopener">一步步实现slam1-项目框架搭建</a></p>
+</li>
+<li>
+<p><a href="http://fengbing.net/2016/04/03/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0slam2-orb%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/" target="_blank" rel="noopener">一步步实现slam2-orb特征检测</a></p>
+</li>
+<li>
+<p><a href="http://fengbing.net/2016/04/23/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0slam3-%E5%88%9D%E5%A7%8B%E4%BD%8D%E5%A7%BF%E4%BC%B0%E8%AE%A11/" target="_blank" rel="noopener">一步步实现slam3-初始位置估计1</a></p>
+</li>
+<li>
+<p><a href="http://fengbing.net/2016/04/24/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0slam3-%E5%88%9D%E5%A7%8B%E4%BD%8D%E5%A7%BF%E4%BC%B0%E8%AE%A12/" target="_blank" rel="noopener">一步步实现slam3-初始位置估计2</a></p>
+</li>
+</ul>
+<p><a href="http://www.leiphone.com/news/201609/Qj6uJhaywpBD8vdq.html" target="_blank" rel="noopener">SLAM最终话：视觉里程计</a>(高翔博士)</p>
+<p><a href="http://www.bilibili.com/video/av5913124/" target="_blank" rel="noopener">双目视觉里程计</a>(谢晓佳-视频)</p>
+<p><a href="http://www.bilibili.com/video/av6069884/" target="_blank" rel="noopener">视觉SLAM中的矩阵李群基础</a>(王京-视频)</p>
+<p><a href="http://www.bilibili.com/video/av6640192/" target="_blank" rel="noopener">路径规划</a>(王超群-视频)</p>
+<p><a href="http://www.bilibili.com/video/av6298224/" target="_blank" rel="noopener">优化与求解</a>(刘毅-视频)</p>
+<p><a href="http://www.bilibili.com/video/av6299156/" target="_blank" rel="noopener">直接法的原理与实现</a>(高翔-视频)</p>
+<p><a href="https://pan.baidu.com/s/1miuOIUW" target="_blank" rel="noopener">Course on SLAM</a> 提取码：i94s</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5MTM1MTQwMw==&amp;mid=2247484602&amp;idx=1&amp;sn=b6d4b9d24af02a1e8de7f30e7f17f525&amp;chksm=ec10babedb6733a8c5b4ff4877b250394797efff616647778885515991daf25e27f2cd0f9914&amp;mpshare=1&amp;scene=24&amp;srcid=0323y0KxEHYSArWp9ldTTSOi&amp;key=0722bcaff7a71b24fa77c83e37758d99034902520ffb87ae1ceeaed5271181bc7a04c3cab7ed2588574061afc774ff7c19c8538b91f113a45b4f7edb666ccdff2b6a60c60746cff9ef32d749f0f7e87f&amp;ascene=0&amp;uin=NTA0OTM2NzY%3D&amp;devicetype=iMac+MacBookAir7%2C2+OSX+OSX+10.12+build(16A323)&amp;version=12020010&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=XHDonKi50slr29BQ9oY9LM0lAhnHy33o2h%2Fz2ho0874%3D" target="_blank" rel="noopener">LM算法计算单应矩阵</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5MTM1MTQwMw==&amp;mid=2247484587&amp;idx=1&amp;sn=82c66613817bd6f50f58cd309dc48a6a&amp;chksm=ec10baafdb6733b9ce69ef19f27087ab8ebfc40d479fc5f0469c301d414c3745d6abb02e2d8b&amp;mpshare=1&amp;scene=24&amp;srcid=0323ANeCiITgcqDmjeIQZ7Li&amp;key=a4c24fb23da90f2ca36bf82f0a48f6a72ddb40abe90030450b2d73544285ef7c297334f0b202b66bddc6aee8ff556fa9c0ac3d4178332056bea0f16171e090921d01980d4007b6102671f14f8b1af8e9&amp;ascene=0&amp;uin=NTA0OTM2NzY%3D&amp;devicetype=iMac+MacBookAir7%2C2+OSX+OSX+10.12+build(16A323)&amp;version=12020010&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=XHDonKi50slr29BQ9oY9LM0lAhnHy33o2h%2Fz2ho0874%3D" target="_blank" rel="noopener">激光SLAM</a>(王龙军)</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5MTM1MTQwMw==&amp;mid=2247484979&amp;idx=1&amp;sn=3d4af432a50842360f31561dbabfa58b&amp;chksm=ec10b837db673121941d8c3e1c8492238f6922b3223b397b399f0066be03171a9146d6c0c939&amp;mpshare=1&amp;scene=24&amp;srcid=0323oLiJv6WiRX2odtfQDXPe&amp;key=a4c24fb23da90f2ca935bf18db801448a4369496fff7ca8e359883d8b14cc7b482b81a7bc8d50d9165bb8e2a99056a1b79bc3e423cfdd735279a28883133cf50a7ae158b88b39b1a33477e71788b8e5b&amp;ascene=0&amp;uin=NTA0OTM2NzY%3D&amp;devicetype=iMac+MacBookAir7%2C2+OSX+OSX+10.12+build(16A323)&amp;version=12020010&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=XHDonKi50slr29BQ9oY9LM0lAhnHy33o2h%2Fz2ho0874%3D" target="_blank" rel="noopener">我们如何定位SLAM？——关于技术创新、产品开发和管理的经验和教训</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5MTM1MTQwMw==&amp;mid=2247485956&amp;idx=1&amp;sn=3d95d417c7a1446a90276473ec736f0b&amp;chksm=ec10b400db673d168f0c34245c58f9c6fbf339be3366689537468fa5ea84e92a964c92dc8be3&amp;mpshare=1&amp;scene=24&amp;srcid=0323LglzpLJ5ftLN1isUQEc7&amp;key=04a263dc798cf3e2798bd64119c159030a49ead5db2e70090701706793c09e38d26018f0415fe1d986020f20cd29987e51c790ceee046946112b55ded02fc28ccdc2392550a895bf8c1a8515cdc87fb9&amp;ascene=0&amp;uin=NTA0OTM2NzY%3D&amp;devicetype=iMac+MacBookAir7%2C2+OSX+OSX+10.12+build(16A323)&amp;version=12020010&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=XHDonKi50slr29BQ9oY9LM0lAhnHy33o2h%2Fz2ho0874%3D" target="_blank" rel="noopener">语义SLAM的未来与思考(1)</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5MTM1MTQwMw==&amp;mid=2247486496&amp;idx=1&amp;sn=672421edb67a7566a8d3629596f12496&amp;chksm=ec10b224db673b3245d7c49ac07b9e7e924b07d93992c0a4392649624178a614eb084eee5cd7&amp;mpshare=1&amp;scene=24&amp;srcid=0323rFVB2RhlBb8YrM7zYgyo&amp;key=405f89b14d07d74b9f658163a8b0fb12e76b79928dfd59dd093a011fc98c93a37d0b489893c3d90a6e2e5b8516f05b0443ac35204d4c2e3c1f28398ff9d48148aa69f818c141f08503c15445b4af2375&amp;ascene=0&amp;uin=NTA0OTM2NzY%3D&amp;devicetype=iMac+MacBookAir7%2C2+OSX+OSX+10.12+build(16A323)&amp;version=12020010&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=XHDonKi50slr29BQ9oY9LM0lAhnHy33o2h%2Fz2ho0874%3D" target="_blank" rel="noopener">语义SLAM的未来与思考(2)</a></p>
+<h2>优秀文章</h2>
+<p>泡泡机器人SLAM优秀技术文章</p>
+<ul>
+<li>
+<p><a href="http://weixin.niurenqushi.com/article/2017-02-12/4766381.html" target="_blank" rel="noopener">SLAM: 现在，未来和鲁棒年代（一）</a></p>
+</li>
+<li>
+<p><a href="http://weixin.niurenqushi.com/article/2017-02-13/4767586.html" target="_blank" rel="noopener">SLAM: 现在，未来和鲁棒年代（二）</a></p>
+</li>
+<li>
+<p><a href="http://weixin.niurenqushi.com/article/2017-02-14/4768761.html" target="_blank" rel="noopener">SLAM: 现在，未来和鲁棒年代（三）</a></p>
+</li>
+<li>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5MTM1MTQwMw==&amp;mid=2247488263&amp;idx=1&amp;sn=1c10dbf32bfd90c3587988652df6187d&amp;chksm=ec10ad03db672415dcea09f62f2341fd330895c71c77b04a92d6be3e3f0274eb2771a07354dd&amp;mpshare=1&amp;scene=24&amp;srcid=0323gxrX4cn4zd4zY4dZcIcd&amp;key=3c2da574259c4c3bab55c1c5c0eab459ad4b990e6130aed37d181792a2918d8c8ab73d84eb0872e0631e5c953289d05de5e32588c28a8c899225e45087d67cb4577a806dfce9d5b23eb5f099c7cc8af4&amp;ascene=0&amp;uin=NTA0OTM2NzY%3D&amp;devicetype=iMac+MacBookAir7%2C2+OSX+OSX+10.12+build(16A323)&amp;version=12020010&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=BNJCJrAc4xlKLazxgWI8g7b%2BvcGziaU7%2Bs7XLYj8ASQ%3D" target="_blank" rel="noopener">SLAM: 现在，未来和鲁棒年代（四）</a></p>
+</li>
+<li>
+<p><a href="http://weixin.niurenqushi.com/article/2017-02-25/4779559.html" target="_blank" rel="noopener">SLAM: 现在，未来和鲁棒年代（五）</a></p>
+</li>
+</ul>
+<p><a href="http://weibo.com/ttarticle/p/show?id=2309403994589869514382&amp;mod=zwenzhang" target="_blank" rel="noopener">SLAM刚刚开始的未来</a>(张哲)</p>
+<p><a href="http://www.arjiang.com/index.php?m=content&amp;c=index&amp;a=show&amp;catid=11&amp;id=418" target="_blank" rel="noopener">2D Slam与3D SLam 的区别到底在哪里</a></p>
+<p><a href="https://www.zhihu.com/question/51707998" target="_blank" rel="noopener">研究SLAM，对编程的要求有多高？</a></p>
+<p><a href="https://www.zhihu.com/question/37071486" target="_blank" rel="noopener">SLAM在VR/AR领域重要吗？</a></p>
+<p><a href="https://www.zhihu.com/question/50385799" target="_blank" rel="noopener">单目SLAM在移动端应用的实现难点有哪些？</a></p>
+<p><a href="http://www.leiphone.com/news/201607/GLQj0wrjKD4eHvq5.html" target="_blank" rel="noopener">机器人的双眸：视觉SLAM是如何实现的？</a></p>
+<p><a href="http://www.leiphone.com/news/201605/oj1lxZVPulRdNxYt.html" target="_blank" rel="noopener">牛逼哄哄的SLAM技术 即将颠覆哪些领域？</a></p>
+<h2>技术博客</h2>
+<p><a href="http://www.cnblogs.com/gaoxiang12" target="_blank" rel="noopener">半闲居士</a>----高翔博士的SLAM博客（力推）</p>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/5041142.html" target="_blank" rel="noopener">SLAM拾萃(1)：octomap</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/3776107.html" target="_blank" rel="noopener">视觉SLAM漫谈（二）:图优化理论与g2o的使用</a></p>
+</li>
+</ul>
+<p><a href="http://blog.csdn.net/heyijia0327" target="_blank" rel="noopener">白巧克力亦唯心</a></p>
+<ul>
+<li>
+<p><a href="http://blog.csdn.net/heyijia0327/article/details/47686523" target="_blank" rel="noopener">graph slam tutorial : 从推导到应用1</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/heyijia0327/article/details/47731631" target="_blank" rel="noopener">graph slam tutorial ：从推导到应用２</a></p>
+</li>
+</ul>
+<p><a href="http://fengbing.net/" target="_blank" rel="noopener">冯兵</a></p>
+<ul>
+<li>
+<p><a href="http://fengbing.net/2015/07/25/%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%E7%AE%80%E4%BB%8B/" target="_blank" rel="noopener">视觉里程计简介</a></p>
+</li>
+<li>
+<p><a href="http://fengbing.net/2015/08/01/%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%E6%80%BB%E4%BB%8B%E7%BB%8D/" target="_blank" rel="noopener">视觉里程计总介绍</a></p>
+</li>
+</ul>
+<p><a href="http://www.cnblogs.com/hitcm/" target="_blank" rel="noopener">hitcm</a></p>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/hitcm/p/5616364.html" target="_blank" rel="noopener">ROS实时采集Android的图像和IMU数据</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/hitcm/p/5245463.html" target="_blank" rel="noopener">基于点线特征的Kinect2实时环境重建（Tracking and Mapping）</a></p>
+</li>
+</ul>
+<p><a href="http://blog.csdn.net/wendox/article/category/6555599" target="_blank" rel="noopener">何必浓墨重彩</a></p>
+<ul>
+<li>
+<p><a href="http://blog.csdn.net/wendox/article/details/52507220" target="_blank" rel="noopener">SLAM代码（优化及常用库）</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/wendox/article/details/52552286" target="_blank" rel="noopener">SLAM代码（多视几何基础)</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/wendox/article/details/52719252" target="_blank" rel="noopener">SLAM代码（三维重建）</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/wendox/article/details/53454768" target="_blank" rel="noopener">SLAM代码（设计模式）</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/wendox/article/details/53489982" target="_blank" rel="noopener">SLAM代码（设计模式2）</a></p>
+</li>
+</ul>
+<p><a href="http://www.cnblogs.com/luyb/" target="_blank" rel="noopener">路游侠</a></p>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/6481725.html" target="_blank" rel="noopener">AR中的SLAM</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5773691.html" target="_blank" rel="noopener">SVO原理解析</a></p>
+</li>
+</ul>
+<p><a href="https://zhuanlan.zhihu.com/computercoil" target="_blank" rel="noopener">电脑线圈</a></p>
+<p><a href="http://blog.csdn.net/wishchin/article/category/5723249/2" target="_blank" rel="noopener">wishchin</a></p>
+<h2>网站与研究组织</h2>
+<p><a href="http://space.bilibili.com/38737757/#!/" target="_blank" rel="noopener">泡泡机器人</a>----泡泡机器人是中国SLAM研究爱好者自发组成的团体，在自愿条件下分享SLAM相关知识，为推动国内SLAM研究做出一点小小的贡献。</p>
+<p><img src="paopao.png" alt=""></p>
+<p><a href="http://www.rosclub.cn/cate-9.html" target="_blank" rel="noopener">ROSClub机器人俱乐部</a>----这是一个完美的ROS机器人开发交流社区平台，在这里你可以找到你所要的！</p>
+<p><a href="http://www.slamcn.org/index.php/%E9%A6%96%E9%A1%B5" target="_blank" rel="noopener">SLAMCN</a>-----SLAM精选国内外学习资源</p>
+<p><a href="http://openslam.org/" target="_blank" rel="noopener">openslam.org</a>--A good collection of open source code and explanations of SLAM.(推荐)</p>
+<p><a href="http://blog.exbot.net/" target="_blank" rel="noopener">易科机器人实验室</a></p>
+<p><a href="http://www.elecfans.com/tags/slam/" target="_blank" rel="noopener">电子发烧友--SLAM</a></p>
+<p><a href="http://www.eeworld.com.cn/tags/SLAM" target="_blank" rel="noopener">电子工程世界--SLAM</a></p>
+<p><a href="http:/vision.princeton.edu/people/xj/" target="_blank" rel="noopener">Jianxiong Xiao (Professor X)</a>---从事cv dl与slam相结合的多项研究.</p>
+<p><a href="http://ais.informatik.uni-freiburg.de/teaching/ws13/mapping/" target="_blank" rel="noopener">Robot Mapping</a></p>
+<p><a href="http://www.discovery.com/tv-shows/rusted-development/hosts/chuck-palumbo/" target="_blank" rel="noopener">Chuck Palumbo</a>----需要翻墙</p>
+<p><a href="http://grauonline.de/wordpress/" target="_blank" rel="noopener">Alexander Grau's blog</a>----博客里有很多关于机器人, SLAM, 传感器等技术</p>
+<p><a href="https://www.doc.ic.ac.uk/~ajd/index.html" target="_blank" rel="noopener">Andrew Davison: Research</a></p>
+<p><a href="http://www.ai.rug.nl/~gert/as/" target="_blank" rel="noopener">Autonome and Perceptive Systemen</a>---research page at University of Groningen about visual SLAM.</p>
+<p><a href="http://www.dis.uniroma1.it/~labrococo/tutorial_icra_2016/" target="_blank" rel="noopener">SLAM Tutorial@ICRA 2016</a></p>
+<p><a href="http://www.acfr.usyd.edu.au/education/summerschool.shtml" target="_blank" rel="noopener">SLAM Summer School</a>----https://github.com/kanster/awesome-slam#courses-lectures-and-workshops</p>
+<p><a href="http://webdiis.unizar.es/~neira/slam.html" target="_blank" rel="noopener">autoloc</a></p>
+<h2>书籍与资料</h2>
+<p><a href="https://pan.baidu.com/s/1gf1KEdX" target="_blank" rel="noopener">工业机器人视觉系统组成及介绍</a>(fu78)</p>
+<p><a href="https://pan.baidu.com/s/1jIKBwSu" target="_blank" rel="noopener">深度学习</a>（zyn2）</p>
+<p><a href="https://pan.baidu.com/s/1kV5apsN" target="_blank" rel="noopener">svo_lsd</a>(uyce)</p>
+<p><a href="https://pan.baidu.com/s/1o8M5fSY" target="_blank" rel="noopener">MEMS IMU的入门与应用 - 胡佳兴</a>(vt6m)</p>
+<p><a href="https://pan.baidu.com/s/1nvv2M6l" target="_blank" rel="noopener">双目视觉里程计</a>(27jk)</p>
+<p><a href="https://pan.baidu.com/s/1dEJj1Ln" target="_blank" rel="noopener">高精度实时视觉定位的关键技术研究</a>(yrct)</p>
+<p><a href="https://pan.baidu.com/s/1ceoq78" target="_blank" rel="noopener">ORB-SLAM2源码详解</a>(su4r)</p>
+<p><a href="https://pan.baidu.com/s/1mhVg2ta" target="_blank" rel="noopener">ORB-SLAM2源码详解-补充H矩阵分解</a>(vjik)</p>
+<p><a href="https://pan.baidu.com/s/1i5QJeYx" target="_blank" rel="noopener">激光slam</a>(9dqd)</p>
+<p><a href="https://pan.baidu.com/s/1eRNRf1o" target="_blank" rel="noopener">图像特征的非刚性匹配</a>(w85h)</p>
+<p><a href="https://pan.baidu.com/s/1nvLlsgT" target="_blank" rel="noopener">orb-slam7.1简单重构泡泡</a>(b7fx)</p>
+<p>英文版（有些需翻墙）</p>
+<ul>
+<li>
+<p><a href="http://webdiis.unizar.es/~neira/SLAM/SLAM_5_Trends.pdf" target="_blank" rel="noopener">Current trends in SLAM</a>---关于DTAM,PTAM,SLAM++等系统的对比</p>
+</li>
+<li>
+<p><a href="http://webdiis.unizar.es/~neira/SLAM/SLAM_4_Scaling.pptx.pdf" target="_blank" rel="noopener">The scaling problem</a>----针对SLAM计算量过大的问题进行讲解</p>
+</li>
+<li>
+<p><a href="http://www-personal.acfr.usyd.edu.au/tbailey/papers/slamtute1.pdf" target="_blank" rel="noopener">slamtute1--The Essential Algorithms</a></p>
+</li>
+<li>
+<p><a href="http://staffhome.ecm.uwa.edu.au/~00053612/vo/MVAV_SLAM11.pdf" target="_blank" rel="noopener">A random-finite-set approach to Bayesian SLAM</a></p>
+</li>
+<li>
+<p><a href="http://www.frc.ri.cmu.edu/~hpm/project.archive/reference.file/Smith&amp;Cheeseman.pdf" target="_blank" rel="noopener">On the Representation and Estimation of Spatial Uncertainty</a></p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1606.05830" target="_blank" rel="noopener">Past, Present, and Future of Simultaneous Localization And Mapping: Towards the Robust-Perception Age</a>(2016)</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1607.02565" target="_blank" rel="noopener">Direct Sparse Odometry</a></p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1509.05909" target="_blank" rel="noopener">Modelling Uncertainty in Deep Learning for Camera Relocalization</a></p>
+</li>
+<li>
+<p><a href="http://ieeexplore.ieee.org/document/7487264/" target="_blank" rel="noopener">Tree-connectivity: Evaluating the graphical structure of SLAM</a></p>
+</li>
+<li>
+<p><a href="https://groups.csail.mit.edu/rrg/papers/greene_icra16.pdf" target="_blank" rel="noopener">Multi-Level Mapping: Real-time Dense Monocular SLAM</a></p>
+</li>
+<li>
+<p><a href="http://asrl.utias.utoronto.ca/~tdb/bib/barfoot_ser15.pdf" target="_blank" rel="noopener">State Estimation for Robotic -- A Matrix Lie Group Approach </a></p>
+</li>
+<li>
+<p><a href="http://www.probabilistic-robotics.org/" target="_blank" rel="noopener">Probabilistic Robotics</a>----Dieter Fox, Sebastian Thrun, and Wolfram Burgard, 2005</p>
+</li>
+<li>
+<p><a href="http://www.igi-global.com/book/simultaneous-localization-mapping-mobile-robots/66380" target="_blank" rel="noopener">Simultaneous Localization and Mapping for Mobile Robots: Introduction and Methods</a></p>
+</li>
+<li>
+<p><a href="http://vision.ucla.edu/MASKS/" target="_blank" rel="noopener">An Invitation to 3-D Vision -- from Images to Geometric Models</a>----Yi Ma, Stefano Soatto, Jana Kosecka and Shankar S. Sastry, 2005</p>
+</li>
+</ul>
+<h2>SLAM 方案</h2>
+<p>ORB-SLAM</p>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5215168.html" target="_blank" rel="noopener">ORB-SLAM（一）简介</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5240168.html" target="_blank" rel="noopener">ORB-SLAM（二）性能</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5260785.html" target="_blank" rel="noopener">ORB-SLAM（三）地图初始化</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5357790.html" target="_blank" rel="noopener">ORB-SLAM（四）追踪</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5447497.html" target="_blank" rel="noopener">ORB-SLAM（五）优化</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/luyb/p/5599042.html" target="_blank" rel="noopener">ORB-SLAM（六）回环检测</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20589372" target="_blank" rel="noopener">ORB_SLAM 初接触</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20596486" target="_blank" rel="noopener">ORB_SLAM 初接触2</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20599601" target="_blank" rel="noopener">ORB_SLAM - 3：和markerless AR的结合</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20602540" target="_blank" rel="noopener">ORB_SLAM - 4：卡片地图预先创建</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20608728" target="_blank" rel="noopener">ORB_SLAM - 5：SLAM多目标添加</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/li-yao7758258/p/5906447.html" target="_blank" rel="noopener">运行ORB-SLAM笔记_编译篇（一）</a>----Being_young</p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/li-yao7758258/p/5912663.html" target="_blank" rel="noopener">运行ORB-SLAM笔记_使用篇（二）</a>----Being_young</p>
+</li>
+<li>
+<p><a href="http://webdiis.unizar.es/~raulmur/orbslam/" target="_blank" rel="noopener">ORB-SLAM</a>----ORB-SLAM 官方网站</p>
+</li>
+<li>
+<p><a href="http://qiqitek.com/blog/?p=13" target="_blank" rel="noopener">ORB-SLAM：精确多功能单目SLAM系统</a>----中文翻译</p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/5161223.html" target="_blank" rel="noopener">视觉SLAM实战：ORB-SLAM2 with Kinect2</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/dourenyin/article/details/48055441" target="_blank" rel="noopener">ORB-SLAM--- 让程序飞起来</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/fuxingyin/article/details/53511439" target="_blank" rel="noopener">ORB-SLAM 笔记</a></p>
+</li>
+</ul>
+<p>RGB-SLAM</p>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4462518.html" target="_blank" rel="noopener">视觉SLAM实战（一）：RGB-D SLAM V2</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4652478.html" target="_blank" rel="noopener">一起做RGB-D SLAM (2)</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4659805.html" target="_blank" rel="noopener">一起做RGB-D SLAM (3)</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4669490.html" target="_blank" rel="noopener">一起做RGB-D SLAM (4)</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4719156.html" target="_blank" rel="noopener">一起做RGB-D SLAM (5)</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4739934.html" target="_blank" rel="noopener">一起做RGB-D SLAM (6)</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4754948.html" target="_blank" rel="noopener">一起做RGB-D SLAM(7) （完结篇）</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/gaoxiang12/p/4770813.html" target="_blank" rel="noopener">一起做RGB-D SLAM(8) （关于调试与补充内容）</a></p>
+</li>
+<li>
+<p><a href="http://www.rosclub.cn/post-85.html" target="_blank" rel="noopener">一起做RGB-D SLAM (9)--问题总结</a></p>
+</li>
+</ul>
+<p>PTAM单目</p>
+<ul>
+<li>
+<p><a href="http://blog.csdn.net/zzzblog/article/details/14455463" target="_blank" rel="noopener">PTAM算法流程介绍</a></p>
+</li>
+<li>
+<p><a href="http://www.robots.ox.ac.uk/~gk/PTAM/" target="_blank" rel="noopener">Parallel Tracking and Mapping for Small AR Workspaces</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20302059?refer=computercoil" target="_blank" rel="noopener">PTAM跟踪过程中的旋转预测方法</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/20308700" target="_blank" rel="noopener">PTAM跟踪失败后的重定位</a></p>
+</li>
+</ul>
+<p>LSD-SLAM</p>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/hitcm/p/4907465.html" target="_blank" rel="noopener">LSD-SLAM深入学习（1）-基本介绍与ros下的安装</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/hitcm/p/4907536.html" target="_blank" rel="noopener">LSD-SLAM深入学习（2）-算法解析</a></p>
+</li>
+<li>
+<p><a href="http://www.cnblogs.com/hitcm/p/4887345.html" target="_blank" rel="noopener">LSD-SLAM深入学习（3）-代码解析</a></p>
+</li>
+<li>
+<p><a href="http://vision.in.tum.de/research/vslam/lsdslam" target="_blank" rel="noopener">LSD-SLAM: Large-Scale Direct Monocular SLAM</a>----Computer Vision Group</p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/lancelot_vim/article/details/51706832" target="_blank" rel="noopener">lsd-slam源码解读第一篇:Sophus/sophus</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/lancelot_vim/article/details/51708412" target="_blank" rel="noopener">lsd-slam源码解读第二篇:DataStructures</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/lancelot_vim/article/details/51730676" target="_blank" rel="noopener">lsd-slam源码解读第三篇:算法解析</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/lancelot_vim/article/details/51758870" target="_blank" rel="noopener">lsd-slam源码解读第四篇:tracking</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/lancelot_vim/article/details/51789318" target="_blank" rel="noopener">lsd-slam源码解读第五篇:DepthEstimation</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/lancelot_vim/article/details/51812484" target="_blank" rel="noopener">sd-slam源码解读第六篇:GlobalMapping</a></p>
+</li>
+</ul>
+<p>DSO单目</p>
+<ul>
+<li>
+<p><a href="http://vision.in.tum.de/research/vslam/dso" target="_blank" rel="noopener">DSO: Direct Sparse Odometry</a></p>
+</li>
+<li>
+<p><a href="http://www.zglwfww.com/a/dajiadouzaikan/2016/1216/5775.html" target="_blank" rel="noopener">DSO论文速递（一）----泡泡机器人</a></p>
+</li>
+<li>
+<p><a href="http://diyitui.com/content-1482249289.66463991.html" target="_blank" rel="noopener">DSO论文速递（二）----泡泡机器人</a></p>
+</li>
+<li>
+<p><a href="http://diyitui.com/content-1482851742.66460941.html" target="_blank" rel="noopener">DSO论文速递（三）----泡泡机器人</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/heyijia0327/article/details/53173146" target="_blank" rel="noopener">DSO 初探</a>----白巧克力亦唯心</p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/24072804" target="_blank" rel="noopener">基于视觉+惯性传感器的空间定位方法</a></p>
+</li>
+</ul>
+<p>SVO单目</p>
+<ul>
+<li>
+<p><a href="http://blog.csdn.net/heyijia0327/article/details/51083398" target="_blank" rel="noopener">svo： semi-direct visual odometry 论文解析</a></p>
+</li>
+<li>
+<p><a href="https://github.com/uzh-rpg/rpg_svo/wiki" target="_blank" rel="noopener">安装说明</a></p>
+</li>
+<li>
+<p><a href="http://blog.sina.com.cn/s/blog_7b83134b0102wfu4.html" target="_blank" rel="noopener">安装SVO</a></p>
+</li>
+<li>
+<p><a href="http://blog.csdn.net/wendox/article/details/52536706" target="_blank" rel="noopener">SLAM代码之svo代码分析</a></p>
+</li>
+</ul>
+<p>DTAM</p>
+<ul>
+<li><a href="https://github.com/anuranbaka/OpenDTAM" target="_blank" rel="noopener">OpenDTAM</a>----An open source implementation of DTAM</li>
+</ul>
+<h2>优秀案例</h2>
+<p><a href="https://github.com/raulmur/ORB_SLAM" target="_blank" rel="noopener">ORB_SLAM</a>----多功能和单目的SLAM框架</p>
+<p><a href="https://github.com/raulmur/ORB_SLAM2" target="_blank" rel="noopener">ORB_SLAM2</a>----Real-Time SLAM for Monocular, Stereo and RGB-D Cameras, with Loop Detection and Relocalization Capabilities</p>
+<p><a href="https://github.com/tum-vision/lsd_slam" target="_blank" rel="noopener">LSD-SLAM</a>----很有名的，不多解释了</p>
+<p><a href="https://github.com/tum-vision/dvo_slam" target="_blank" rel="noopener">DVO-SLAM</a>----Dense Visual Odometry and SLAM</p>
+<p><a href="https://github.com/felixendres/rgbdslam_v2" target="_blank" rel="noopener">RGBD-SLAM2</a>----RGB-D SLAM for ROS</p>
+<p><a href="https://github.com/uzh-rpg/rpg_svo" target="_blank" rel="noopener">SVO</a>----Semi-Direct Monocular Visual Odometry</p>
+<p><a href="https://github.com/RainerKuemmerle/g2o" target="_blank" rel="noopener">G2O</a>----A General Framework for Graph Optimization</p>
+<p><a href="https://github.com/googlecartographer/cartographer" target="_blank" rel="noopener">cartographer</a>----这是一个提供实时SLAM在2D和3D的跨多个平台和传感器配置。</p>
+<p><a href="https://github.com/gaoxiang12/slambook" target="_blank" rel="noopener">slambook</a>----高翔博士的SLAM书籍中的code</p>
+<p><a href="https://github.com/technomancy/slamhound" target="_blank" rel="noopener">slamhound</a>----Slamhound rips your namespace form apart and reconstructs it.</p>
+<p><a href="https://github.com/mp3guy/ElasticFusion" target="_blank" rel="noopener">ElasticFusion</a>----Real-time dense visual SLAM system</p>
+<p><a href="https://github.com/egoist-sx/ORB_SLAM_iOS" target="_blank" rel="noopener">ORB_SLAM_iOS</a>----ORB_SLAM for iOS</p>
+<p><a href="https://github.com/FangGet/ORB_SLAM2_Android" target="_blank" rel="noopener">ORB_SLAM2_Android</a>----a repository for ORB_SLAM2 in Android</p>
+<p><a href="https://github.com/mp3guy/Kintinuous" target="_blank" rel="noopener">Kintinuous</a>----Real-time large scale dense visual SLAM system</p>
+<p><a href="https://github.com/strasdat/ScaViSLAM" target="_blank" rel="noopener">ScaViSLAM</a>----This is a general and scalable framework for visual SLAM. It employs &quot;Double Window Optimization&quot; (DWO).</p>
+<h1>不断更新中...</h1>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/KiAlexander?tab=repositories">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">SLAM 学习与开发经验分享</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.1.</span> <span class="toc-text">导语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">进阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">优秀文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.6.</span> <span class="toc-text">技术博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.7.</span> <span class="toc-text">网站与研究组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.8.</span> <span class="toc-text">书籍与资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.9.</span> <span class="toc-text">SLAM 方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.10.</span> <span class="toc-text">优秀案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">不断更新中...</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&text=SLAM 学习与开发经验分享[转]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&is_video=false&description=SLAM 学习与开发经验分享[转]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SLAM 学习与开发经验分享[转]&body=Check out this article: http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&title=SLAM 学习与开发经验分享[转]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/26/SLAM 学习与开发经验分享[转]/&name=SLAM 学习与开发经验分享[转]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Kimyoung
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/KiAlexander?tab=repositories">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

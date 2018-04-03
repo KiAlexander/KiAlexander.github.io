@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="机器视觉算法与应用 图像采集（光学知识）  照明   使用倾斜的环形光，常用于使孔洞或感兴趣区域产生阴影，缺点是光线分布不均匀。 使用同轴平行光，常用于采集会产生镜面反射的物体的图像。   镜头(数字传感器成像)   摄像机（将通过镜头聚焦于平面的光线生成图像）   CCD CMOS   摄像机-计算机接口  机器视觉算法  ROI（region of interest），感兴趣区域。机器视觉、图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机视觉学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/计算机视觉学习笔记/index.html">
+<meta property="og:site_name" content="素夜吴墨">
+<meta property="og:description" content="机器视觉算法与应用 图像采集（光学知识）  照明   使用倾斜的环形光，常用于使孔洞或感兴趣区域产生阴影，缺点是光线分布不均匀。 使用同轴平行光，常用于采集会产生镜面反射的物体的图像。   镜头(数字传感器成像)   摄像机（将通过镜头聚焦于平面的光线生成图像）   CCD CMOS   摄像机-计算机接口  机器视觉算法  ROI（region of interest），感兴趣区域。机器视觉、图">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-03-31T01:37:31.343Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机视觉学习笔记">
+<meta name="twitter:description" content="机器视觉算法与应用 图像采集（光学知识）  照明   使用倾斜的环形光，常用于使孔洞或感兴趣区域产生阴影，缺点是光线分布不均匀。 使用同轴平行光，常用于采集会产生镜面反射的物体的图像。   镜头(数字传感器成像)   摄像机（将通过镜头聚焦于平面的光线生成图像）   CCD CMOS   摄像机-计算机接口  机器视觉算法  ROI（region of interest），感兴趣区域。机器视觉、图">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>计算机视觉学习笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/KiAlexander?tab=repositories">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/26/视觉SLAM学习笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/03/25/Awesome Blockchain/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/26/计算机视觉学习笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&text=计算机视觉学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&is_video=false&description=计算机视觉学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=计算机视觉学习笔记&body=Check out this article: http://yoursite.com/2018/03/26/计算机视觉学习笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&name=计算机视觉学习笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">机器视觉算法与应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">图像采集（光学知识）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">机器视觉算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">机器视觉应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">计算机视觉教程（章毓晋）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">计算机视觉——算法与应用（Rchard  Szeliski)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">计算机视觉——一种现代方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">计算机视觉中的数学方法</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        计算机视觉学习笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">素夜吴墨</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-26T11:20:35.264Z" itemprop="datePublished">2018-03-26</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>机器视觉算法与应用</h1>
+<h2>图像采集（光学知识）</h2>
+<blockquote>
+<p>照明</p>
+</blockquote>
+<ol>
+<li>使用倾斜的环形光，常用于使孔洞或感兴趣区域产生阴影，缺点是光线分布不均匀。</li>
+<li>使用同轴平行光，常用于采集会产生镜面反射的物体的图像。</li>
+</ol>
+<blockquote>
+<p>镜头(数字传感器成像)</p>
+</blockquote>
+<blockquote>
+<p>摄像机（将通过镜头聚焦于平面的光线生成图像）</p>
+</blockquote>
+<ol>
+<li>CCD</li>
+<li>CMOS</li>
+</ol>
+<blockquote>
+<p>摄像机-计算机接口</p>
+</blockquote>
+<h2>机器视觉算法</h2>
+<blockquote>
+<p>ROI（region of interest），感兴趣区域。机器视觉、图像处理中，从被处理的图像以方框、圆、椭圆、不规则多边形等方式勾勒出需要处理的区域，称为感兴趣区域，ROI。在Halcon、OpenCV、Matlab等机器视觉软件上常用到各种算子（Operator）和函数来求得感兴趣区域ROI，并进行图像的下一步处理。</p>
+</blockquote>
+<blockquote>
+<p>亚像素精读数据：亚像素阈值分割和亚像素边缘提取</p>
+</blockquote>
+<blockquote>
+<p>图像增强</p>
+</blockquote>
+<ul>
+<li>灰度值转换：灰度值线性比例缩放 $f(g)=ag+b$</li>
+<li>辐射标定；无图标定算法 $\frac{q(G_1)}{q(G_2)}=\frac{e_1}{e_2}=e_{1,2} $</li>
+</ul>
+<blockquote>
+<p>图像平滑</p>
+</blockquote>
+<ol>
+<li>时域平均法</li>
+<li>空间平均法（均值滤波器）</li>
+</ol>
+<blockquote>
+<p>傅立叶变换</p>
+</blockquote>
+<blockquote>
+<p>几何变换</p>
+</blockquote>
+<ul>
+<li>仿射变换</li>
+<li>投影变换</li>
+<li>图像变换</li>
+<li>极坐标变换</li>
+</ul>
+<blockquote>
+<p>图像分割</p>
+</blockquote>
+<ol>
+<li>阈值分割（直方图双峰加高斯平滑）</li>
+<li>提取连通区域（4连通与8连通）</li>
+<li>亚像素精度阈值分割</li>
+</ol>
+<blockquote>
+<p>特征提取</p>
+</blockquote>
+<ol>
+<li>区域特征（区域面积、区域轮廓）</li>
+<li>灰度值特征</li>
+<li>轮廓特征</li>
+</ol>
+<blockquote>
+<p>形态学</p>
+</blockquote>
+<ol>
+<li>区域形态学(并集、交集、差集、补集、平移和转置)</li>
+<li>灰度值形态学（结构元）</li>
+</ol>
+<blockquote>
+<p>边缘提取</p>
+</blockquote>
+<ol>
+<li>在一维和二维中的边缘定义</li>
+</ol>
+<ul>
+<li>一阶导数绝对值最大、二阶导数过零</li>
+<li>图像中若干点上梯度量值在梯度的方向上局部最大</li>
+</ul>
+<ol start="2">
+<li>一维边缘提取（Canny滤波器、Deriche滤波器、Lanser滤波器）</li>
+<li>二维边缘提取（高斯滤波器的偏导数）</li>
+<li>边缘的准确度</li>
+</ol>
+<blockquote>
+<p>几何基元的分割和拟合</p>
+</blockquote>
+<ul>
+<li>直线拟合</li>
+<li>圆拟合</li>
+<li>椭圆拟合</li>
+<li>将轮廓分割为直线、圆和椭圆</li>
+</ul>
+<blockquote>
+<p>摄像机标定</p>
+</blockquote>
+<ul>
+<li>面阵摄像机的摄像机模型</li>
+<li>线阵摄像机的摄像机模型</li>
+<li>标定过程</li>
+<li>从单幅图像中提取世界坐标</li>
+<li>摄像机参数的准确度</li>
+</ul>
+<blockquote>
+<p>立体重构</p>
+</blockquote>
+<ul>
+<li>立体几何结构</li>
+<li>立体匹配</li>
+</ul>
+<blockquote>
+<p>模板匹配</p>
+</blockquote>
+<ol>
+<li>基于灰度值的模板匹配</li>
+</ol>
+<ul>
+<li>计算模板与图像之间差值的绝对值的总和（SAD）</li>
+<li>计算模板与图像之间所有差值的平方和（SSD）</li>
+<li>不随任何线性的光照变化而变化的相似度量：归一化互相关系数（NCC）</li>
+</ul>
+<ol start="2">
+<li>使用图形金字塔进行匹配</li>
+<li>基于灰度值的亚像素精度匹配</li>
+<li>带旋转与缩放的模板匹配</li>
+<li>可靠的模板匹配算法（边缘匹配物体的策略）</li>
+</ol>
+<ul>
+<li>在匹配中使用原始的边缘点，或者增加每个点的一些特性</li>
+<li>将边缘分割为多个几何基元，然后在图像中匹配这些分割得到的几何边缘</li>
+<li>基于边缘的切割，可以得到边缘上的突变点然后在图像中匹配这些突变点</li>
+</ul>
+<blockquote>
+<p>光学字符识别（OCR）</p>
+</blockquote>
+<ol>
+<li>字符分割
+使用固定的阈值或自动选择的阈值进行阈值分割、动态阈值分割以及提取图像中的连通区域。</li>
+<li>特征提取</li>
+<li>字符分类（贝叶斯决策规则、神经网络）</li>
+</ol>
+<h2>机器视觉应用</h2>
+<ul>
+<li>半导体晶片切割</li>
+<li>序列号读取</li>
+<li>锯片检测</li>
+<li>印刷检测</li>
+<li>表面检测</li>
+<li>火化塞测量</li>
+<li>模制品披峰检测</li>
+<li>冲孔板检查</li>
+<li>使用双目立体视觉系统进行三维平面重构</li>
+<li>电阻姿态检验</li>
+<li>非织布料分类</li>
+</ul>
+<h1>计算机视觉教程（章毓晋）</h1>
+<blockquote>
+<p>空间知觉</p>
+</blockquote>
+<ol>
+<li>非视觉性深度线索</li>
+</ol>
+<ul>
+<li>眼睛聚焦调节</li>
+<li>双眼视轴的辐合</li>
+</ul>
+<ol start="2">
+<li>双目深度线索</li>
+<li>单目深度线索</li>
+</ol>
+<blockquote>
+<p>摄像机标定的步骤（A=PRT）</p>
+</blockquote>
+<ol>
+<li>需标定的参数是旋转矩阵R和平移矢量T。</li>
+<li>需标定的参数是焦距λ。</li>
+<li>需标定的参数是镜头景象失真系数k。</li>
+<li>需标定的参数是不确定性图像尺度因子μ。</li>
+</ol>
+<blockquote>
+<p>灰度差值（用于失真校正）</p>
+</blockquote>
+<ul>
+<li>最邻近插值（零阶插值）</li>
+<li>双线性插值</li>
+</ul>
+<blockquote>
+<p>模板卷积（最常用运算）</p>
+</blockquote>
+<ol>
+<li>将模板在图中漫游，并将模板中心与图中某个像素位置重合。</li>
+<li>将模板上的各个系数与模板下各对应的灰度值相乘。</li>
+<li>将所有乘积相加（为保持灰度范围，常将结果再除以模板的系数个数）。</li>
+<li>将上述运算结果（模板的输出相应）赋给图中对应模板中心位置的像素。</li>
+</ol>
+<blockquote>
+<p>USAN原理</p>
+</blockquote>
+<ul>
+<li>如果将模板中各个像素的灰度都与模板中心的核像素的灰度进行比较，那么就会发现总有一部分模板区域像素的灰度与核像素的灰度相同或相似。这部分称为核同值区域（USAN），即与核有相同值的区域，可简称为核同值区。</li>
+</ul>
+<blockquote>
+<p>角点和边缘检测(SUSAN算子，最小核同值算子)</p>
+</blockquote>
+<blockquote>
+<p>基本哈夫变换（检测点-线对偶性）</p>
+</blockquote>
+<ol>
+<li>对参数空间中参数p和q的可能取值范围进行量化，根据量化结果构造一个累加数组A ($p_{min}:p_{max},q_{min}:q_{max}$),并初始化为零。</li>
+<li>对每个XY空间中的给定点让p取遍所有可能值，用$q=-px+y$计算出q，根据p和q的值累加A，即$A(p,q)=A(p,q)+1$。</li>
+<li>根据累加后A中最大值所对应的p和q，由$y=px+q$确定出XY中的一条直线，A中的最大值代表在此直线上给定点的数目，满足直线方程的点是共线的。</li>
+</ol>
+<blockquote>
+<p>位置直方图技术</p>
+</blockquote>
+<ul>
+<li>位置直方图是将图像向多个轴投影，并对像素灰度求和而得到的直方图，也称横向直方图。</li>
+<li>假设图像中有多个分开的目标，将每个目标分别向水平方向和垂直方向进行投影叠加，就可以分别获得一个水平直方图和一个垂直直方图。如果从这两个直方图向目标区域进行反投影，就可以方便地确定出各个目标的位置。</li>
+</ul>
+<blockquote>
+<p>形状特性分析
+*紧凑性</p>
+</blockquote>
+<ol>
+<li>外观比 $R=\frac{L}{W}$</li>
+</ol>
+<ul>
+<li>形状因子（周长平方与4π倍区域面积的比值）</li>
+<li>偏心率（伸长度）——惯性椭圆</li>
+<li>球状性（内外切圆半径的比值）</li>
+<li>圆形性（从区域重心到边界点的平均距离与均方差的比值）</li>
+</ul>
+<blockquote>
+<p>光流三要素</p>
+</blockquote>
+<ul>
+<li>运动（速度场）——必要条件</li>
+<li>带光学特性的部位（例如有灰度的像素点），它能携带信息。</li>
+<li>成像投影（从场景到图像平面）因而能被观察到。</li>
+</ul>
+<blockquote>
+<p>Hausdorff距离
+$$H(A,B)=max[h(A,B),h(B,A)]$$
+其中设$||·||$为范数，则
+$$h(A,B)=\max \limits_{a \in A}\min \limits_{b \in B}||a-b||$$
+$$h(B,A)=\max \limits_{b \in B}\min \limits_{a \in A}||b-a||$$</p>
+</blockquote>
+<blockquote>
+<p>场景解释</p>
+</blockquote>
+<ol>
+<li>轮廓标记</li>
+</ol>
+<ul>
+<li>刃边（真正边缘）</li>
+<li>翼边</li>
+<li>折痕</li>
+<li>阴影</li>
+</ul>
+<ol start="2">
+<li>结构推理</li>
+<li>回溯标记</li>
+</ol>
+<h1>计算机视觉——算法与应用（Rchard  Szeliski)</h1>
+<blockquote>
+<p>特征描述子</p>
+</blockquote>
+<ol>
+<li>偏差和增益规范化（MOPS）</li>
+</ol>
+<ul>
+<li>为弥补在特征点检测中小的错误（位置，方向和尺度），这些多尺度的图像块（MOPS）是以在相对于检测尺度的五个像素间隔下进行采样的，使用图像金字塔的较粗层次来避免失真。（8x8采样）</li>
+</ul>
+<ol start="2">
+<li>尺度不变特征变换（SIFT）</li>
+</ol>
+<ul>
+<li>SIFT特征通过计算在检测到的关键点周围16x16窗口内每一个像素的梯度得到，计算时使用检测到的关键点所在的高斯金字塔级别。因为远离中心的权重更容易受到位置不正的影响，为了减小这些影响，梯度值被通过一个高斯下降函数降低权重。</li>
+</ul>
+<ol start="3">
+<li>梯度位置方向直方图（GLOH）</li>
+</ol>
+<h1>计算机视觉——一种现代方法</h1>
+<h1>计算机视觉中的数学方法</h1>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/KiAlexander?tab=repositories">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">机器视觉算法与应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">图像采集（光学知识）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">机器视觉算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">机器视觉应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">计算机视觉教程（章毓晋）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">计算机视觉——算法与应用（Rchard  Szeliski)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">计算机视觉——一种现代方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">计算机视觉中的数学方法</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/26/计算机视觉学习笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&text=计算机视觉学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&is_video=false&description=计算机视觉学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=计算机视觉学习笔记&body=Check out this article: http://yoursite.com/2018/03/26/计算机视觉学习笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&title=计算机视觉学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/26/计算机视觉学习笔记/&name=计算机视觉学习笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Kimyoung
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/KiAlexander?tab=repositories">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
